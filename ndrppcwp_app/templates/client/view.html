@@ -1,0 +1,142 @@
+{% extends 'client/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load custom_tags %}
+
+{% block title %}
+{% endblock title%}
+
+{% block additional_css %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+
+    h1.counter {
+        color: #0C79BD;
+        font-family: 'Libre Baskerville', serif;
+        font-size: 3rem;
+    }
+
+    .g-recaptcha-container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+{% endblock additional_css %}
+
+{% block content_body %}
+<div class="container-fluid">
+
+    <div class="row mt-5">
+        <div class="col-md-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">
+                            <i class="fas fa-quote-left mr-1"></i>
+                            Cite this article</button>
+                        {% if research.pdf %}
+                        <button id="btn-full-text-dl" type="button" class="btn btn-default"
+                            data-url="{{ research.pdf.url  }}">
+                            <i class="fas fa-file-pdf mr-1"></i>
+                            Full Text as PDF
+                        </button>
+                        {% else %}
+                        <button  id="btn-full-text-dl" type="button" class="btn btn-default">
+                            <i class="fas fa-file-pdf mr-1"></i>
+                            Full Text as PDF
+                        </button>
+                        {% endif %}
+                        <button id="btn-report-error" type="button" class="btn btn-default"
+                            data-url="{{ research.get_absolute_url_report_error }}">
+                            <i class="fas fa-comment mr-1"></i>
+                            Report an error
+                        </button>
+                        <a href="https://emb.gov.ph/rdd-site/" target="_blank" class="btn btn-default">
+                            <i class="fas fa-envelope mr-1"></i>
+                            Send Mail</a>
+                    </div>
+                    <a href="{% url 'ndrppcwp_app:index_page' %}" class="btn btn-primary float-right">
+                        <i class="fas fa-arrow-left mr-1"></i>
+                        Return to Main Page
+                    </a>
+                </div>
+                <div class="card-body">
+                    <h2 class="r-title">
+                        {{ research.title }}
+                    </h2>
+                    <hr>
+                    <dl class="row text-lg">
+                        <dt class="col-sm-4">Author:</dt>
+                        <dd class="col-sm-8">
+                            {% for a in research.author.all %}
+                            {{a.get_full_name}}
+                            {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </dd>
+                        <dt class="col-sm-4">Source Document:</dt>
+                        <dd class="col-sm-8">{{ research.source_document }}</dd>
+                        </dd>
+                        <dt class="col-sm-4">Publication Type:</dt>
+                        <dd class="col-sm-8">{{ research.publication_type }}</dd>
+                        </dd>
+                        <dt class="col-sm-4">Publication Date:</dt>
+                        <dd class="col-sm-8">{{ research.pub_date }}</dd>
+                        <dt class="col-sm-4">Core Strategies Category:</dt>
+                        <dd class="col-sm-8">{{ research.study_area }}</dd>
+                    </dl>
+                    <dl class="text-lg">
+                        <dt>Abstract:</dt>
+                        <dd class="text-justify">{{ research.fk_abstract_research.text }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-3">
+            <div class="card card-success">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-bullhorn mr-1"></i>
+                        Call for papers
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a href="https://emb.gov.ph/rdd-site/" target="_blank" class="btn btn-primary btn-lg w-100 mb-2">
+                        Submit now
+                        <i class="fas fa-angle-double-right ml-1"></i>
+                    </a>
+                    <a href="https://www.facebook.com/DENREnviBureau/" target="_blank" class="btn btn-primary btn-lg w-100">
+                        Subscribe now
+                        <i class="fas fa-hand-pointer ml-1"></i>
+                    </a>
+
+                </div>
+            </div>
+            <div class="card card-success">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-user mr-1"></i>
+                        Current Visitors
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h1 class="text-center counter">
+                        {{ research.fk_abstract_research.counter|intcomma }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+
+<!-- <script src='https://www.google.com/recaptcha/api.js' async></script> -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="{% static 'js/micelleneous/getcookies.js' %}" defer></script>
+<script src="{% static 'js/micelleneous/report_error.js' %}" defer></script>
+{% endblock rearscript %}

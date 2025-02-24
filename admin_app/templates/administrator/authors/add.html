@@ -1,0 +1,91 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Add New Authors
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:authors' %}">Manage Authors</a></li>
+            <li class="breadcrumb-item active" >Add</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <form method="POST" id="form-author">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fas fa-user mr-1"></i>
+                            Add New Author
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% include 'partials/_messages.html' %}
+                        {% include 'partials/_form_errors.html' %}
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label><span class="text-danger mr-1">*</span>Prefix:</label> 
+                                {{ form.prefixes }}
+                            </div>
+                            <div class="form-group">
+                                <label><span class="text-danger mr-1">*</span>First Name:</label> 
+                                {{ form.f_name }}
+                            </div>
+                            <div class="form-group">
+                                <label>Middle Name:</label> 
+                                {{ form.m_name }}
+                            </div>
+                            <div class="form-group">
+                                <label><span class="text-danger mr-1">*</span>Last Name:</label> 
+                                {{ form.l_name }}
+                            </div>
+                           
+                            <div class="form-group">
+                                <label>Suffix Name (If Applicable):</label> 
+                                {{ form.s_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-gradient-success" name="_save">
+                            <i class="fas fa-save mr-1"></i>Save
+                        </button>
+                        <button type="submit" class="btn bg-gradient-info" name="_save_add_another">
+                            <i class="fas fa-plus mr-1"></i>
+                            Save and add another
+                        </button>
+
+                        <a href="{% url 'ndrppcwp_admin_app:authors' %}" class="btn bg-gradient-secondary float-right">
+                            <i class="fas fa-arrow-left mr-1"></i>
+                            Back</a>
+
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+<script src="{% static 'js/administrator/author/form.js' %}" type="text/javascript" defer></script>
+{% endblock rearscript %}

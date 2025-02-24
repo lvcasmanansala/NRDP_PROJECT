@@ -1,0 +1,104 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Manage Authors
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'ndrppcwp_admin_app:report_errors' %}">Reported Errors</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+               
+                <div class="card-body"> 
+                    {% include 'partials/_messages.html' %}
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Research</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Organization/Agency/Institution</th>
+                                <th>Message</th>
+                                <th>Date Submitted</th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            {% for i in reports %}
+                            <tr>
+                                <td>
+                                    <a href="{{i.research.get_absolute_url_view}}" target="_blank">{{i.research.title}}</a>
+                                </td>
+                                <td>{{i.name}}</td>
+                                <td>{{i.email}}</td>
+                                <td>{{i.org}}</td>
+                                <td>{{i.text}}</td>
+                                <td>{{i.date_created}}</td>
+                                <td class="text-center" style="width: 10% !important;">
+                                    <div class="btn-group"> 
+                                        <a href="{{i.get_absolute_url_view}}" class="btn bg-gradient-danger"
+                                            data-toggle="tooltip" data-placement="top" title="View/Delete">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center text-danger">No Record Available!</td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+<script src="{% static 'js/micelleneous/getcookies.js' %}"></script>
+<script src="{% static 'js/administrator/report_errors/report_errors.js' %}" defer></script>
+{% endblock rearscript %}

@@ -1,0 +1,78 @@
+{% load static %}
+{% load custom_tags %}
+
+<div class="modal-header">
+    <h5 class="modal-title">
+        <i class="fas fa-filter mr-1"></i>
+        Advance Filter Opton
+    </h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body"> 
+    <form method="POST" id="form-report-error">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <h4><u>NRDP-PCWP Strategy:</u></h4>
+
+                {% for i in study_area %}
+            
+                <div class="custom-control custom-checkbox"> 
+                    <input class="custom-control-input strategy" type="checkbox" id="{{ i.0 }}" name="{{ i.0 }}"  value="{{ i.0 }}"> 
+                    <label for="{{ i.0 }}" class="custom-control-label text-capitalize">
+                        {{ i.0 }}
+                    </label>
+                </div>
+                {% endfor %}
+       
+                
+                <hr>
+                <h4><u>Study Status:</u></h4>
+                <div class="custom-control custom-checkbox"> 
+                    <input class="custom-control-input study-status" type="checkbox" name="st_completed" id="st_completed" value="st_completed"> 
+                    <label for="st_completed" class="custom-control-label text-capitalize">
+                        Complete
+                    </label>
+                </div>
+                <div class="custom-control custom-checkbox"> 
+                    <input class="custom-control-input study-status" type="checkbox" name="st_ongoing" id="st_ongoing" value="st_ongoing"> 
+                    <label for="st_ongoing" class="custom-control-label text-capitalize">
+                        On Going
+                    </label>
+                </div>
+                <hr>
+                <h4><u>Categories:</u></h4>
+                {% for i in categories %} 
+                <div class="custom-control custom-checkbox"> 
+                    <input class="custom-control-input categories" type="checkbox" name="{{i.0}}" id="{{ i.0 }}" value="{{ i.0 }}"> 
+                    <label for="{{ i.0 }}" class="custom-control-label text-capitalize">
+                        {{ i.0 }}
+                    </label>
+                </div>
+                {% endfor %} 
+                <hr>
+                <h4><u>Year Published:</u></h4> 
+                <select name="year_published" class="form-control select2"> 
+                    <option ></option>
+                    {% for i in year_published %} 
+                    <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+                
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer justify-content-between">
+    <!-- <button type="button" class="btn btn-default  btn-sm"
+        data-dismiss="modal">Close</button> -->
+    <button type="button" class="btn btn-default  btn-sm" id="btn-clear-filter"
+        data-dismiss="modal">
+        <i class="fas fa-times mr-1"></i>
+        Clear Filter</button>
+    <button type="button" class="btn btn-warning btn-sm" id="btn-apply">
+        <i class="fas fa-check mr-1"></i>Apply
+    </button>
+</div>

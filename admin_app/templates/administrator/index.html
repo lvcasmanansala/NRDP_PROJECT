@@ -1,0 +1,88 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load humanize %}
+
+
+
+{% block title %}
+Admin Home Page
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+    </ol>
+  </nav>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-3 col-6">
+
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>{{ authors.count|intcomma }}</h3>
+                  <p>Authors</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-user-tie"></i>
+                </div>
+                <a href="{% url 'ndrppcwp_admin_app:authors' %}" class="small-box-footer">
+                  More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+              <div class="small-box bg-success">
+                <div class="inner"> 
+                  <h3>{{ researches.count|intcomma }}</h3>
+                  <p>Researches</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-microscope"></i>
+                </div>
+                <a href="{% url 'ndrppcwp_admin_app:researches' %}" class="small-box-footer">
+                  More info <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-6">
+
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>{{total_visitors|intcomma}}</h3>
+                  <p>Total Visitors</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-door-open"></i>
+                </div>
+      
+              </div>
+            </div>
+
+      
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+{% endblock rearscript %}

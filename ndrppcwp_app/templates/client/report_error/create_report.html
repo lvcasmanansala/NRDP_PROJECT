@@ -1,0 +1,45 @@
+{% load static %}
+{% load custom_tags %}
+
+<div class="modal-header">
+    <h4 class="modal-title">Error Report Form</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body"> 
+    <form method="POST" id="form-report-error">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 col-12">
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label}}">Name:</label>
+                    {{ form.name }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label}}">Email Address:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.org.id_for_label}}">Organization/Agency/Institution :</label>
+                    {{ form.org }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.text.id_for_label}}">Message :</label>
+                    {{ form.text }}
+                </div>
+                <div class="g-recaptcha-container">
+                    
+                    <div id="my-recaptcha"></div>
+                </div>  
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-default"
+        data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-primary" id="btn-submit">
+        <i class="fas fa-save mr-1"></i>Submit
+    </button>
+</div>

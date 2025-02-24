@@ -1,0 +1,117 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Delete/Remove Research
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/research.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:researches' %}">Manage Researches</a></li>
+            <li class="breadcrumb-item active" >Delete/Remove</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fas fa-trash-alt mr-1"></i>
+                            Deleting/Removing Research
+                        </div>
+                    </div>
+                    <div class="card-body"> 
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                            Warning! You cannot undo this changes.
+                        </div>
+                        <h3>Do you want to delete this Research 
+                            <u class="text-danger">{{ research.title }} </u>    
+                        forever?</h3>
+
+                        <dl class="row">
+                            <dt class="col-sm-4">Contributor ID:</dt>
+                            <dd class="col-sm-8">{{ research.contrib_id }}</dd>
+                            <dt class="col-sm-4">Title:</dt>
+                            <dd class="col-sm-8">{{ research.title }}</dd>
+                            <dt class="col-sm-4">Author(s):</dt>
+                            <dd class="col-sm-8">
+                                {% for a in research.author.all %}
+                                    {{ a.get_full_name }} 
+                                    {% if not forloop.last %} <b>,</b> {% endif %}
+                                {% endfor %}
+
+                            </dd>
+                            <dt class="col-sm-4">URL:</dt>
+                            <dd class="col-sm-8">{{ research.URL }}
+                                <a href="{{ research.URL }}" class="ml-1" target="_blank">
+                                    
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                            </dd>
+                            <dt class="col-sm-4">Publication Date:</dt>
+                            <dd class="col-sm-8">{{ research.pub_date }}</dd>
+                            <dt class="col-sm-4">Study Area:</dt>
+                            <dd class="col-sm-8">{{ research.study_area }}</dd>
+                            <dt class="col-sm-4">Source Document:</dt>
+                            <dd class="col-sm-8">{{ research.source_document }}</dd>
+                            <dt class="col-sm-4">Text Availability:</dt>
+                            <dd class="col-sm-8">{{ research.text_availability }}</dd>
+                            <dt class="col-sm-4">Publication Type:</dt>
+                            <dd class="col-sm-8">{{ research.publication_type }}</dd>
+                            <dt class="col-sm-4">Status (if Published or Not):</dt>
+                            <dd class="col-sm-8"> 
+                                {% if  research.status %}
+                                <i class="fas fa-check-circle text-success"></i>
+                                {% else %}
+                                <i class="fas fa-times-circle text-danger"></i>
+                                {% endif  %}
+
+                            </dd>
+                            <dt class="col-sm-4">Remarks:</dt>
+                            <dd class="col-sm-8">{{ research.remarks }}</dd>
+                            <dt class="col-sm-4">Abstract:</dt>
+                            <dd class="col-sm-8">{{ research.fk_abstract_research.text }}</dd>
+                            <dt class="col-sm-4"># of Visitors:</dt>
+                            <dd class="col-sm-8">{{ research.fk_abstract_research.counter }}</dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-gradient-danger">
+                            <i class="fas fa-trash-alt mr-1"></i>Yes! Delete it.
+                        </button> 
+
+                        <a href="{% url 'ndrppcwp_admin_app:researches' %}" class="btn bg-gradient-secondary float-right">
+                            <i class="fas fa-arrow-left mr-1"></i>
+                            Back</a>
+
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+{% endblock rearscript %}

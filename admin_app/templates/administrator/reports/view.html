@@ -1,0 +1,84 @@
+.
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Deleting Authors
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid"> 
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:report_errors' %}">Reported Errors</a></li>
+            <li class="breadcrumb-item active"><a href="{% url 'ndrppcwp_admin_app:report_errors' %}">Viewing/Deleting Reported Errors</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fas fa-user-times mr-1"></i>
+                            Viewing/Deleting Reported Error
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h3>Do you want to <b class="text-capitalize text-danger">delete</b> this report forever?</h3>
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                            Warning! You cannot undo this changes.
+                        </div>
+                        <h3><u>Details:</u></h3>
+                        <dl class="row text-lg">
+                            <dt class="col-sm-4">Name:</dt>
+                            <dd class="col-sm-8">  {{ report.name }}
+                            </dd>
+                            <dt class="col-sm-4">Research:</dt>
+                            <dd class="col-sm-8"> {{ report.research.title }}</dd>
+                            
+                            <dt class="col-sm-4">Email:</dt>
+                            <dd class="col-sm-8"> {{ report.email }}</dd>
+                            
+                            <dt class="col-sm-4">Organization/Agency/Institution :</dt>
+                            <dd class="col-sm-8"> {{ report.org }}</dd>
+                            <dt class="col-sm-4">Message:</dt>
+                            <dd class="col-sm-8"> {{ report.text }}</dd>
+                            <dt class="col-sm-4">Date Sent:</dt>
+                            <dd class="col-sm-8 text-capitalize"> {{ report.date_created }}</dd>
+                        </dl>
+
+                         
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-gradient-danger">
+                            <i class="fas fa-trash-alt mr-1"></i>Yes! Delete it.
+                        </button> 
+
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+{% endblock rearscript %}

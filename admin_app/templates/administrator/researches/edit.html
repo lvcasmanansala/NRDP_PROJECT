@@ -1,0 +1,133 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Edit/Update Research
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+<link rel="stylesheet" href="{% static 'css/research.css' %}">
+
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:researches' %}">Manage Researches</a></li>
+            <li class="breadcrumb-item active" >Edit/Update</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <form method="POST" id="form-research" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fas fa-file-import mr-1"></i>
+                            Update/Edit Research
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% include 'partials/_messages.html' %}
+                        {% include 'partials/_form_errors.html' %} 
+                        <div class="col-md-6">
+                    
+                            <div class="form-group">
+                                <label>Title:</label> 
+                                {{ form.title }}
+                            </div>
+                            <div class="form-group">
+                                <label>Author(s):</label> 
+                                {{ form.author }}
+                            </div>
+                            <div class="form-group">
+                                <label>URL Link:</label> 
+                                {{ form.URL }}
+                            </div>
+                            <div class="form-group">
+                                <label>Publication Date:</label> 
+                                {{ form.pub_date }}
+                            </div>
+                            <div class="form-group">
+                                <label>Publication Year:</label> 
+                                {{ form.pub_year }}
+                            </div>
+                            <div class="form-group">
+                                <label>PDF Attachment:</label> 
+                                {{ form.pdf }}
+                            </div>
+                            <div class="form-group">
+                                <label>Applicable NRDP-PCWP Strategy:</label> 
+                                {{ form.study_area }}
+                            </div>
+                        
+                            <div class="form-group">
+                                <label>Source Document:</label> 
+                                {{ form.source_document }}
+                            </div>
+                            <!-- ! URL href table and date format on edit form -->
+                        
+                            <div class="form-group">
+                                <label>Text Availability:</label> 
+                                {{ form.text_availability }}
+                            </div>
+                            <div class="form-group">
+                                <label>Publication Type:</label> 
+                                {{ form.publication_type }}
+                            </div>
+                            <div class="form-group">
+                                <label>Status (if Completed or Not):</label> 
+                                {{ form.status }}
+                            </div>
+                            <div class="form-group">
+                                <label>Category:</label> 
+                                {{ form.categories }}
+                            </div>
+                            <div class="form-group">
+                                <label>Remarks:</label> 
+                                {{ form.remarks }}
+                            </div>
+                            <div class="form-group">
+                                <label>Abstract Text:</label> 
+                                {{ form.abstract_text }}
+                            </div>
+                        
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-gradient-success" name="_save">
+                            <i class="fas fa-save mr-1"></i>Update
+                        </button>
+                        <button type="submit" class="btn bg-gradient-info" name="_save_add_another">
+                            <i class="fas fa-edit mr-1"></i>
+                            Update and continue editing
+                        </button>
+
+                        <a href="{% url 'ndrppcwp_admin_app:researches' %}" class="btn bg-gradient-secondary float-right">
+                            <i class="fas fa-arrow-left mr-1"></i>
+                            Back</a>
+
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+<script src="{% static 'js/administrator/researches/form.js' %}" defer></script>
+{% endblock rearscript %}

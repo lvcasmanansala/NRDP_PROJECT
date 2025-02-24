@@ -1,0 +1,65 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Deleting Authors
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:authors' %}">Manage Authors</a></li>
+            <li class="breadcrumb-item active" >Delete/Remove</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fas fa-user-times mr-1"></i>
+                            Deleting/Removing Existing Author
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-warning alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                            Warning! You cannot undo this changes.
+                        </div>
+                         <h3>Do you want to delete this author 
+                            <u class="text-danger">{{ author.get_full_name }} </u>    
+                        forever?</h3>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn bg-gradient-danger">
+                            <i class="fas fa-trash-alt mr-1"></i>Yes! Delete it.
+                        </button> 
+
+                    </div>
+                </div>
+            </form>
+          
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+{% endblock rearscript %}

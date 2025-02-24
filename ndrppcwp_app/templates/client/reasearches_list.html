@@ -1,0 +1,76 @@
+{% load static %}
+{% load humanize %}
+{% load custom_tags %}
+
+<div class="list-group">
+    {% for q in query %}
+    <div class="list-group-item research-item">
+        <div class="row">
+            <div class="col px-4">
+                <div>
+                    {% if q.rank %}
+                    <div class="float-right">{{ q.rank|decimal_to_percent }}</div>
+                    {% endif %}
+                    <h2 class="r-title">
+
+                        <a href="{{ q.get_absolute_url_view }}">
+                            {% if q.search_title %}
+                            <u> {{q.search_title|safe}}</u>
+                            {% else %}
+                            <u> {{q.title}}</u>
+                            {% endif %}
+                        </a>
+                    </h2>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Author:</dt>
+                        <dd class="col-sm-8">
+                            {% for a in q.author.all %}
+                            {% autoescape off %}
+                            {% html_highlight_text a.get_full_name %}
+                            {% endautoescape %}
+                            {% if not forloop.last %},{% endif %}
+                            {% endfor %}
+                        </dd>
+                        <dt class="col-sm-4">Source Document:</dt>
+                        <dd class="col-sm-8">{{ q.source_document }}</dd>
+                        <dt class="col-sm-4">Abstract:</dt>
+                        <dd class="col-sm-8 abstract text-justify">
+
+
+                            <p>
+                                {% if q.search_abstract %}
+                                {{ q.search_abstract|safe }}
+                                {% else %}
+                                {{ q.fk_abstract_research.text }}
+                                {% endif %}
+                            </p>
+                        </dd>
+                        <dt class="col-sm-4">URL:</dt>
+                        <dd class="col-sm-8">
+                            {% if q.URL %}
+                            <a href="{{ q.URL }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Open link in new tab">
+                                <i class="fas fa-external-link-alt mr-1"></i> 
+                            </a>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </dd>
+
+                    </dl>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="list-group-item research-item text-center">
+
+        <h3 class="text-danger">No Records Found!</h3>
+    </div>
+
+    {% endfor %}
+</div> 
+

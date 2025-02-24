@@ -1,0 +1,81 @@
+{% load static  %}
+{% load humanize %}
+{% load custom_tags %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="{% static 'images/DENR_LOGO.ico' %}">
+    <title>
+        LMS | IIS - Authentication
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <!-- Sweet Alert -->
+    <link rel="stylesheet" href="{% static 'sweetalert2-11.3.5/package/dist/sweetalert2.min.css' %}">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 10px;
+        }
+
+        .message {
+            margin: 0 auto;
+            border: solid 1px #B6C7D6;
+            text-align: center;
+            width: 50%;
+            border-width: 3px;
+            border-radius: 10px;
+            background-color: #EBF0F5;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'partials/_messages.html' %}
+    <div class="message">
+        <img src="{% static 'images/DENR_LOGO.png' %}" alt="DENR LOGO">
+        <h1>NATIONAL RESEARCH AND DEVELOPMENT PROGRAM FOR PREVENTION AND CONTROL OF WATER POLLUTION</h1>
+      
+        <p>Please wait, your account is currently under verification. We will redirect you as soon we validated your account on IIS.</p> 
+    </div>
+
+
+
+    <!-- REQUIRED SCRIPTS -->
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.js' %}"></script>
+
+    <!-- Sweet Alert -->
+    <script src="{% static 'sweetalert2-11.3.5/package/dist/sweetalert2.min.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            // const queryString = window.location.search;
+            // const urlParams = new URLSearchParams(queryString);
+
+
+        })
+    </script>
+</body>
+
+</html>

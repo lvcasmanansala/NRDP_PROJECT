@@ -1,0 +1,491 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+{% load humanize %}
+
+
+{% block title %}
+Documentation
+{% endblock title%}
+
+
+{% block additional_css %}
+<style>
+    img.img-large {
+        position: relative;
+        display: block; 
+        width: 80%;   
+    }
+    img.img-medium {
+        position: relative;
+        display: block; 
+        height: 800px;   
+    }
+    /* img:hover{
+        cursor: pointer;
+        transform: scale(1.5);
+        transition: 0.5s ease;
+    } */
+</style>
+{% endblock additional_css %}
+
+{% block content_body %}
+<div class="container-fluid">
+    <h2 id="quick-start"><u><a href="">NDRP PCWP Documentation v2.0.5</a></u></h2>
+    <p>
+        <i>
+            National Reseach and Development Program for Prevention and Control of Water Pollution System Application
+            <b>User
+                Guide</b>
+        </i>
+
+    </p>
+    <hr>
+    <h5 class="text-bold text-dark mt-3">Table of contents:</h5>
+    <ul>
+        <li><a href="#accessing-nrdp-pcwp">Accessing the NDRP PCWP Website</a>.</li>
+        <li><a href="#menus">Menus</a>.</li>
+        <li><a href="#managing-authors">Managing Authors</a>.</li>
+        <li><a href="#managing-research">Managing Researches</a>.</li>
+        <li><a href="#dashboard">Dashboard</a>.</li>
+        <li><a href="#logging-out">Logging-out</a>.</li>
+        <li><a href="#future-updates">Future Updates</a>.</li>
+        
+     
+    </ul>
+    <hr>
+    <h3 id="accessing-nrdp-pcwp">Accessing the NRDP PCWP Website:</h3>
+    <p><em><strong>Important Note</strong>: There are various ways to access this system.</em>
+    </p> 
+
+    <h4>Via IIS (As an Administrator)</h4>
+    <ul>
+        <li><b>Log-In </b> you account through IIS:
+            <ol>
+                <li> 
+                    Go to <a href="https://iis.emb.gov.ph" target="_blank">iis.gov.ph <i class="fas fa-external-link-alt"></i> </a> and 
+                    <code class="language-plaintext highlighter-rouge">login your account.</code>
+                </li>
+                <li>
+                    On the left navigation bar select NDRPPCWP</code> menu.
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/menu-ndrp-pcwp.png' %}" alt="Image">
+                </li>
+                <li>
+                    Enter your  <code class="language-plaintext highlighter-rouge">account</code> on the modal/pop-up form and click the <b class="text-uppercase text-success">confirm</b> button.
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/ndrp-pop-up-modal-form.png' %}" height="300" width="500" alt="Image">
+                    
+                </li>
+                <li>
+                    Once the login is successful, you will be redirected on the 
+                    <code class="language-plaintext highlighter-rouge">NDRP PCWP Dashbord page</code>.
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/ndrp-pcwp-dashboard.png' %}" height="500" width="700" alt="Image">
+                </li>
+            </ol>
+        </li>
+         
+        
+    </ul>
+ 
+    <h4>Via Website (As Client)</h4> 
+    <ul>
+        <li>
+            <b>Go to</b> EMB website <a href="https://emb.gov.ph/" target="_blank">emb.gov.ph  <i class="fas fa-external-link-alt"></i> </a>.
+            <ol>
+                <li>
+                    From the menu select the   <code class="language-plaintext highlighter-rouge"> Programs menu and from the sub menu select Environmental Research and Laboratory Services</code>.
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/emb-erlsd-menu.png' %}" height="500" width="700" alt="Image">
+                </li>
+
+                <li>
+                    Scroll Down, and select the <code class="language-plaintext highlighter-rouge">National research and development program for prevention and control of water pollution (database repository) menu hyperlink</code> .
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/emb-nrdp-pcwp-hl.png' %}" height="500" width="700" alt="Image">
+                </li> 
+                <li>
+                    Once you successully selected the <code class="language-plaintext highlighter-rouge">National research and development program for prevention and control of water pollution (database repository) menu hyperlink</code>, you will be redirected the the Client/Home page.
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/nrdp-client-home.png' %}" height="500" width="700" alt="Image">
+                </li>
+
+            </ol>
+        </li>
+    </ul>
+    <h4>Directly (As Administrator)</h4> 
+    <ul>
+        <li>Open your browser and enter <a href="https://nrdppcwp.emb.gov.ph/admin/" target="_blank">https://nrdppcwp.emb.gov.ph/admin/</a> on your <b class="text-warning">URL search bar</b>.
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/direct-login-admin.png' %}" alt="Image">
+        </li>
+    </ul>
+
+    <h4>Directly (As Client)</h4> 
+    <ul>
+        <li>Open your browser and enter <a href="https://nrdppcwp.emb.gov.ph/" target="_blank">https://nrdppcwp.emb.gov.ph/</a> on your <b class="text-warning">URL search bar</b>.
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/direct-access-client.png' %}" alt="Image">
+        </li>
+    </ul>
+    <hr>
+    <h4 id="menus">Menus</h4> 
+    <p><em><strong>Important Note</strong>: Menus allows the user to navigate different pages on the system</em></p>
+    <h4>Menu(Main Menu)</h4> 
+    <ul>
+        <li>The Menu is usually located on the <b class="text-danger text-capitalize">top right</b> side of the page.
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/menus.png' %}" alt="Image">
+        </li>
+        <li> 
+            <b> Menu Lists</b> lists of menu that is currently available on the navigation bar.
+            <ol>
+                <li><b>Documentation</b> <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the documentation/user guide page</code>.</li>
+                <li><b>Dashboard</b> <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the Dashboard page</code>.</li>
+                <li><b>Manage Authors</b> <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the authors management page</code>.</li>
+                <li><b>Manage Research</b> <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the research management page</code>.</li>
+                <li><b>Profile</b> <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Allows the user to navigate more features by viewing the sub menu</code>.</li>
+        
+            </ol>
+        </li>
+        <li>
+            <b>Sub Menu</b> are menu(s) underlying from a menu that shows more features.
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/sub-menu.png' %}" alt="Image"> 
+            <ol>
+                <li><b>Settings</b><i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the settings page</code> <span class="badge badge-warning">Under Development!</span></li>
+                <li><b>Change Password</b><i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the change password page</code> <span class="badge badge-warning">Under Development!</span></li>
+                <li><b>Go to Public Page</b><i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Redirects the user to the client/research page</code></li>
+                <li><b>Log-out</b><i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Log-Out the user's current session</code></li>
+            </ol>
+        </li>
+    </ul>
+    <hr>
+
+    <h3 id="managing-authors">Managing Authors:</h3> 
+    <p><em><strong>Important Note</strong>: Managing Authors allows the user to enroll different authors on the system that can be later on be added to the researches.</em></p>
+    <h4>Manage Authors</h4>
+    <ul>
+        <li>
+            From the menu, select/click the <b class="text-danger">Manage Authors</b> menu (The user will be redirected to the Manage Authors page).
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/manage-authors-page.png' %}" height="600" width="800" alt="Image"> 
+            <b>Manage Authors Page Parts</b><i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i>  Describes the functionality of buttons, text field and tables on the page.
+            <ol>
+                <li>
+                    <b>Breadcrumbs Bar</b> <code class="language-plaintext highlighter-rouge">Located on the upper left corner of the page that shows the level of your current page and enables the user to go back to previous pages.</code>
+ 
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/breadcrumbs.png' %}" alt="Image">
+                </li>
+                <li>
+                    <b>Table List</b> <code class="language-plaintext highlighter-rouge">Contains all the lists of authors enrolled on the system</code>
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/authors-table.png' %}" height="700" width="800" alt="Image">
+                    
+                </li>
+                <li>
+                    <b>Search Bar</b> <code class="language-plaintext highlighter-rouge">Allows the user to filter authors based on a specific keywords that matches the query of authors.</code>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-table-filter.png' %}"  alt="Image">
+                </li>
+            
+                <li>
+                    <b>Pagination</b>  <code class="language-plaintext highlighter-rouge">The pagination paginates the table of authors by (5) for each page to prevent bulk list of authors that may confuse the user.</code>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-table-paginate.png' %}"  alt="Image">
+ 
+                </li>
+                <li>
+                    <b>Add New Author</b> <code class="language-plaintext highlighter-rouge">To add/enroll new author on the system, click the add button on the right most column of the table.</code>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-table-add.png' %}"  alt="Image">
+                    <ol>
+                        <li>
+                            You will be redirected to <b class="text-capitalized">add new author page</b>. <b class="text-danger">Please ensure that the fields is filled-up with proper details before submitting.</b>
+                            <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-add-form.png' %}"  alt="Image"> 
+                            <b><u>Text Fields:</u></b>
+                            <ul>
+                                <li>Suffix Name  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-primary">(Optional)</i></li>
+                                <li>First Name  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> </li>
+                                <li>Middle Name  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-primary">(Optional)</i></li>
+                                <li>Last Name <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i></li>
+                                <li>Educational(Degree) Prefixes <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i><i class="text-primary">(Optional) e.g: <a href="https://our.upd.edu.ph/files/catalogue/DEGREE%20PROGRAMS%20ACRONYMS.pdf" target="_blank" class="text-uppercase"><u>click here <i class="fas fa-external-link-alt"></i></u></a>.</i> </li>
+                            </ul>
+                            <b><u>Buttons</u></b>
+                            <ul>
+                                <li>Save  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Saves the record and <b>redirects</b> to the <b>Manage Authors Page</b></li>
+                                <li>Save and add another  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Saves the record but <b>retains</b> to the <b>current page</b></li>
+                                <li>Back <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Redirects to the <b>Manage Authors Page</b> </li> 
+                            </ul>
+                        </li>
+       
+                    </ol>
+                </li>
+                <li> 
+                    <b>Edit Author</b> <code class="language-plaintext highlighter-rouge">To update/edit existing author on the system, click the edit button on the right most column of the record.</code>
+                    
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-table-edit.png' %}"  alt="Image">
+                    <ol>
+                        <li>
+                            You will be redirected to <b class="text-capitalized">edit author page</b>. <b class="text-danger">Please ensure that the fields is filled-up with proper details before submitting.</b>
+                            <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-edit-form.png' %}"  alt="Image"> 
+                            <b><u>Text Fields:</u></b>
+                            <ul>
+                                <li>Suffix Name  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-primary">(Optional)</i></li>
+                                <li>First Name  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> </li>
+                                <li>Middle Name  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-primary">(Optional)</i></li>
+                                <li>Last Name <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i></li>
+                                <li>Educational(Degree) Prefixes <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i><i class="text-primary">(Optional) e.g: <a href="https://our.upd.edu.ph/files/catalogue/DEGREE%20PROGRAMS%20ACRONYMS.pdf" target="_blank" class="text-uppercase"><u>click here <i class="fas fa-external-link-alt"></i></u></a>.</i> </li>
+                            </ul>
+                            <b><u>Buttons</u></b>
+                            <ul>
+                                <li>Update  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Updates the record and <b>redirects</b> to the <b>Manage Authors Page</b></li>
+                                <li>Update and continue editing <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Updates the record but <b>retains</b> to the <b>current page</b></li>
+                                <li>Back <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Redirects to the <b>Manage Authors Page</b> </li> 
+                            </ul>
+                    </ol>
+                </li>
+                <li>
+                    <b>Delete Author</b> <code class="language-plaintext highlighter-rouge">Removes/Delete Author details permanently.</code>
+                    
+                    <blockquote class="quote-warning">
+                        <h5 id="warning">Note!</h5>
+                        <p>Please take caution before performing this action</p>
+                    </blockquote>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-table-delete.png' %}"  alt="Image">
+                    <ol>
+                        <li>To <b class="text-uppercase text-danger">delete</b> a record on the table, click the delete button of the record you want to <b class="text-danger">remove</b>.</li>
+                        <li>The user will be redirected to <b class="text-primary">delete confirmation page</b>. Once the user confirms, the record will be deleted immediately.
+                            <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/authors-delete-form.png' %}"  alt="Image"> 
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+    </ul> 
+    <hr> 
+    <h3 id="managing-research">Managing Research</h3>  
+    <p><em><strong>Important Note</strong>: Managing Research allows the user to enroll different researches on the database system that can be viewed/searched publicly.</em></p>
+    <ul>
+        <li>
+            From the menu, select/click the <b class="text-danger">Manage Research</b> menu (The user will be redirected to the Manage Research page).
+            <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/researches-table.png' %}"  alt="Image"> 
+            <ol>
+                <li>
+                    <b>Breadcrumbs Bar</b> <code class="language-plaintext highlighter-rouge">Located on the upper left corner of the page that shows the level of your current page and enables the user to go back to previous pages.</code>
+ 
+                    <img class="d-block img-thumbnail" src="{% static 'images/docs/breadcrumbs-researches.png' %}" alt="Image">
+                </li>
+                <li>
+                    <b>Table List</b> <code class="language-plaintext highlighter-rouge">Contains all the lists of researches enrolled on the database system</code>
+                    <div class="row">
+                        <div class="col-md-6"> 
+                            <img class="d-block img-thumbnail img-fluid" src="{% static 'images/docs/researches-table-1.png' %}" alt="Image">
+                            <p class="text-center"><b>Table: Figure 1 left scroll corner.</b></p>
+                        </div>
+                        <div class="col-md-6"> 
+                            <img class="d-block img-thumbnail img-fluid" src="{% static 'images/docs/researches-table-2.png' %}" alt="Image">
+                            <p class="text-center"><b>Table: Figure 2 right scroll corner.</b></p>
+                        </div>
+                    </div>
+                    
+                </li>
+                <li>
+                    <b>Search Bar</b> <code class="language-plaintext highlighter-rouge">Allows the user to filter researches based on a specific keywords that matches the query of researches.</code>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/researches-table-filter.png' %}"  alt="Image">
+                </li>
+            
+                <li>
+                    <b>Pagination</b>  <code class="language-plaintext highlighter-rouge">The pagination paginates the table of authors by (5) for each page to prevent bulk list of authors that may confuse the user.</code>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/researches-table-paginate.png' %}"  alt="Image">
+ 
+                </li>
+                <li>
+                    <b>Add New Research</b> <code class="language-plaintext highlighter-rouge">To add/enroll new research on the system, (Scroll to right) click the add button on the right most column of the table.</code>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/researches-table-add.png' %}"  alt="Image">
+                    <ol>
+                        <li>
+                            You will be redirected to <b class="text-capitalized">add new researcn page</b>. <b class="text-danger">Please ensure that the fields is filled-up with proper details before submitting.</b>
+                            <img class="d-block img-thumbnail img-medium" src="{% static 'images/docs/researches-add.png' %}"  alt="Image"> 
+                            <b><u>Text Fields:</u></b>
+                            <ul>
+                                <li>Contribution ID  
+                                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    Unique Identifiery of a Reseach
+                                </li>
+                                <li>Title  
+                                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> 
+                                    Unique Title of the research
+                                </li>
+                                <li>Authors  
+                                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    The user may select multiple authors based on the authors added before:
+                                    <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-authors.png' %}"  alt="Image">  
+                                </li>
+                                <li>
+                                    URL Link <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-primary">(Optional)</i> Please ensure to enter the correct URL patter e.g <i class="text-primary">https://nrdppcwp.emb.gov.ph/</i>
+                                </li>
+                                <li>
+                                    Publication Date <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> 
+                                    Proper date format is <b class="text-primary">(MM/DD/YYYY)</b> e.g <b class="text-primary"> (01/10/2023)</b> is equivalent to <b class="text-primary">January 10, 2023</b> .
+                                </li>
+                                <li>Study Area
+                                     <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                     The user can search and select the appropriate study area for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-study-area.png' %}"  alt="Image">  
+                                     
+                                </li>
+                                <li>Source Document
+                                     <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                     The user can search and select the appropriate source document for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-source-document.png' %}"  alt="Image"> 
+                                </li>
+                                <li>Text Availability <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    The user can search and select the appropriate text availability for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-text-availability.png' %}"  alt="Image"> 
+                                </li>
+                                <li>Publication Type <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    The user can search and select the appropriate publication type for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-publication-type.png' %}"  alt="Image"> 
+                                </li>
+                                <li>Status<i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    Where the document is published or not. <span class="badge badge-info">May Affect the research results on client side.</span>
+                                </li>
+                                <li>Remarks<i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> Any special notes about the research
+                                </li>
+                                <li>Abstract Text<i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    Contains the main and full details of the research abstract.
+                                </li>
+                                
+                            </ul>
+                            <b><u>Buttons</u></b>
+                            <ul>
+                                <li>Save  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Saves the record and <b>redirects</b> to the <b>Manage Research Page</b></li>
+                                <li>Save and add another  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Saves the record but <b>retains</b> to the <b>current page</b></li>
+                                <li>Back <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Redirects to the <b>Manage Research Page</b> </li> 
+                            </ul>
+                        </li>
+       
+                    </ol>
+                </li>
+                <li> 
+                    <b>Edit Research</b> <code class="language-plaintext highlighter-rouge">To update/edit existing research on the database system, (Scroll to right) click the edit button on the right most column of the record.</code>
+                    
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/research-edit.png' %}"  alt="Image">
+                    <ol>
+                        <li>
+                            You will be redirected to <b class="text-capitalized">edit research page</b>. <b class="text-danger">Please ensure that the fields is filled-up with proper details before submitting.</b>
+                            <img class="d-block img-thumbnail img-medium" src="{% static 'images/docs/research-edit-form.png' %}"  alt="Image"> 
+                            <b><u>Text Fields:</u></b>
+                            <ul>
+                                <li>Contribution ID  
+                                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    Unique Identifiery of a Reseach
+                                </li>
+                                <li>Title  
+                                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> 
+                                    Unique Title of the research
+                                </li>
+                                <li>Authors  
+                                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    The user may select multiple authors based on the authors added before:
+                                    <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-authors.png' %}"  alt="Image">  
+                                </li>
+                                <li>
+                                    URL Link <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-primary">(Optional)</i> Please ensure to enter the correct URL patter e.g <i class="text-primary">https://nrdppcwp.emb.gov.ph/</i>
+                                </li>
+                                <li>
+                                    Publication Date <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> 
+                                    Proper date format is <b class="text-primary">(MM/DD/YYYY)</b> e.g <b class="text-primary"> (01/10/2023)</b> is equivalent to <b class="text-primary">January 10, 2023</b> .
+                                </li>
+                                <li>Study Area
+                                     <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                     The user can search and select the appropriate study area for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-study-area.png' %}"  alt="Image">  
+                                     
+                                </li>
+                                <li>Source Document
+                                     <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                     The user can search and select the appropriate source document for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-source-document.png' %}"  alt="Image"> 
+                                </li>
+                                <li>Text Availability <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    The user can search and select the appropriate text availability for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-text-availability.png' %}"  alt="Image"> 
+                                </li>
+                                <li>Publication Type <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    The user can search and select the appropriate publication type for the research:
+                                     <img class="d-block img-thumbnail" src="{% static 'images/docs/researches-add-publication-type.png' %}"  alt="Image"> 
+                                </li>
+                                <li>Status<i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    Where the document is published or not. <span class="badge badge-info">May Affect the research results on client side.</span>
+                                </li>
+                                <li>Remarks<i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i> Any special notes about the research
+                                </li>
+                                <li>Abstract Text<i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <i class="text-danger">(Required)</i>
+                                    Contains the main and full details of the research abstract.
+                                </li>
+                                
+                            </ul>
+                            <b><u>Buttons</u></b>
+                            <ul>
+                                <li>Update  <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Updates the record and <b>redirects</b> to the <b>Manage Research Page</b></li>
+                                <li>Update and continue editing <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Updates the record but <b>retains</b> to the <b>current page</b></li>
+                                <li>Back <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> Redirects to the <b>Manage Research Page</b> </li> 
+                            </ul>
+                    </ol>
+                </li>
+                <li>
+                    <b>Delete Research</b> <code class="language-plaintext highlighter-rouge">Removes/Delete Research details permanently.</code>
+                    
+                    <blockquote class="quote-warning">
+                        <h5 id="warning">Note!</h5>
+                        <p>Please take caution before performing this action. The research you will be deleted will not be appear or available anymore on the research page.</p>
+                    </blockquote>
+                    <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/researches-table-delete.png' %}"  alt="Image">
+                    <ol>
+                        <li>To <b class="text-uppercase text-danger">delete</b> a record on the table, click the delete button of the record you want to <b class="text-danger">remove</b>.</li>
+                        <li>The user will be redirected to <b class="text-primary">delete confirmation page</b>. Once the user confirms, the record will be deleted immediately.
+                            <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/researches-delete-form.png' %}"  alt="Image"> 
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </li>
+    </ul>
+    <hr>
+    <h3 id="dashboard">Dashboard</h3> 
+    <p><em><strong>Important Note</strong>: The dashboard page contains the detailed summary or statistics of data that is stored on the database system.</em></p>
+    <ol> 
+        <li>To access the Dashboard, Go to the Navigation Menu on the top right side of the page and select the <b class="text-danger text-capitalize">Dashboard</b> Menu.
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/dashboard-menu.png' %}"  alt="Image"> 
+        </li>
+        <li>
+            Once the user clicked the dashboard menu, it will be redirected to dashboard page.
+            <img class="d-block img-thumbnail img-large" src="{% static 'images/docs/dashboard-page.png' %}"  alt="Image"> 
+            <ul>
+                <li>
+                    <b>Authors </b>
+                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Contains the total authors enrolled on the system.</code>
+                </li>
+                <li>
+                    <b>Researches </b>
+                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Contains the total researches enrolled on the system.</code>
+                </li>
+                <li>
+                    <b>Total Visitors </b>
+                    <i class="fas fa-long-arrow-alt-right text-primary ml-2 mr-2"></i> <code class="language-plaintext highlighter-rouge text-capitalize">Contains the total number of visitors on every researches visited on the system.</code>
+                </li>
+            </ul>
+        </li>
+
+        
+    </ol>
+    <hr>
+    <h3 id="logging-out">Logging Out</h3> 
+    <p><em><strong>Important Note</strong>: It is important for user to close or <b class="text-danger">Log-out</b> their sessions before closing the browsers.</em></p>
+    <ol>
+        <li>Go to the <b class="text-danger text-capitalize">profile menu</b> on the <b class="text-danger">top-right</b> corner of the page.</li>
+        <li>Click <b class="text-danger">Log-out</b> 
+            <img class="d-block img-thumbnail" src="{% static 'images/docs/logout-menu.png' %}"  alt="Image"> 
+            
+        </li>
+    </ol>
+    <h3 id="future-updates">Future Updates</h3> 
+    <blockquote class="quote-info">
+        <h5 id="info">Note!</h5>
+        <p>The NRDP PCWP will patch new updates in the near future for best user experience.</p>
+    </blockquote>
+    <hr>
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+{% endblock rearscript %}

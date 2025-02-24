@@ -1,0 +1,151 @@
+{% extends 'administrator/base.html' %}
+{% load static %}
+{% load custom_tags %}
+
+
+
+{% block title %}
+Admin Manage Researches
+{% endblock title%}
+
+{% block additional_css %}
+<link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+<link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock additional_css %}
+
+
+{% block content_body %}
+<div class="container-fluid">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:index_page' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'ndrppcwp_admin_app:researches' %}">Manage Researches</a></li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-tools">
+                        <a href="{% url 'ndrppcwp_admin_app:researches_add' %}" class="btn bg-gradient-success float-right btn-sm"
+                        data-toggle="tooltip" data-placement="top" title="Add new research">
+                        <i class="fas fa-plus"></i> Add new research
+                    </a>
+                    </div>
+                </div>
+                <div class="card-body table-responsive">
+                    {% include 'partials/_messages.html' %}
+             
+                    <table class="table table-bordered table-hover text-nowrap">
+                        <thead>
+                            <tr class="text-center">
+                                <th>Contributor ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>URL</th>
+                                <th>Publication Date</th>
+                                <th>Study area</th>
+                                <th>Source Document</th>
+                                <th>Text Availability</th>
+                                <th>Publication Type</th>
+                                <th>Status</th>
+                                <th>Remarks</th>
+                                <th>Abstract</th>
+                                <th># of Visitors</th>
+                                <th>
+
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for i in query %}
+                            <tr>
+                                <td>{{i.contrib_id}}</td>
+                                <td>{{i.title}}</td>
+                                <td>
+
+                                    {% for a in i.author.all %}
+                                    {{a.get_full_name}}
+                                    {% if not forloop.last %}<b>,</b>{% endif %}
+                                    {% endfor %}
+
+                                </td>
+                                <td class="text-center">
+                                    {% if i.URL %}
+                                    <a href="{{i.URL}}" target="_blank" data-toggle="tooltip" data-placement="top"
+                                        title="Open link in new tab">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                    {% endif %}
+
+                                </td>
+                                <td>{{i.pub_date}}</td>
+                                <td>{{i.study_area}}</td>
+                                <td>{{i.source_document}}</td>
+                                <td>{{i.text_availability}}</td>
+                                <td>{{i.publication_type}}</td>
+                                <td class="text-center">
+                                    {% if i.status %}
+                                    <i class="fas fa-check-circle text-success"></i>
+                                    {% else %}
+
+                                    <i class="fas fa-times-circle text-danger"></i>
+                                    {% endif %}
+                                </td>
+                                <td>{{i.remarks}}</td>
+                                <td>{{i.fk_abstract_research.text}}</td>
+                                <td class="text-center">{{i.fk_abstract_research.counter}}</td>
+                                <td class="text-center" style="width: 10% !important;">
+                                    <div class="btn-group">
+                                        <a href="{{i.get_absolute_url_edit}}" class="btn bg-gradient-warning"
+                                            data-toggle="tooltip" data-placement="top" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{i.get_absolute_url_delete}}" class="btn bg-gradient-danger"
+                                            data-toggle="tooltip" data-placement="top" title="Delete">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center text-danger">No Record Available!</td>
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{% endblock content_body %}
+
+
+{% block rearscript %}
+<script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'plugins/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'plugins/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+<script src="{% static 'js/micelleneous/getcookies.js' %}"></script>
+<script src="{% static 'js/administrator/researches/researches.js' %}" defer></script>
+{% endblock rearscript %}
