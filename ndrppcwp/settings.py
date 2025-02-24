@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 
 from pathlib import Path
+from typing import List
+
 from django.contrib.messages import constants as messages
 from django.core.signing import Signer
 import os
@@ -30,14 +32,14 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'ndrppcwp_app/media')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "*")
 FERNET_KEY = os.getenv("FERNET_KEY")
 IIS_IP = os.getenv("IIS_IP")
 GOOGLE_RECAPTCHA_SECRET_KEY = os.getenv("reCAPTCHA_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production! 
 DEBUG = int(os.environ.get("DEBUG", default=0))
- 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ") 
+
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(" ")
 
 
 # Application definition
