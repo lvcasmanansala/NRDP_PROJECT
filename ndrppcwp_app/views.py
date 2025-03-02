@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import (
     JsonResponse,
     Http404,
@@ -7,7 +7,7 @@ from django.http import (
 from django.core.signing import Signer
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login
-from django.db.models import Q, F
+from django.db.models import Q, F, Count
 from django.db.utils import IntegrityError, DataError
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -27,6 +27,9 @@ from ndrppcwp_app import models, forms as nrdp_pcwp_form
 from admin_app import forms
 from django.views.decorators.csrf import csrf_exempt
 from custom_modules import lsg_decorators
+from .models import Research
+from admin_app.forms import ResearchForm
+
 import json
 
 # NOTE: =====================================[START ERROR PAGES]=====================================
@@ -220,6 +223,37 @@ def research_detail(request, *args, **kwargs):
     }
     return render(request, template_name, context)
 
+
+def research_create(request):
+    if request.method == "POST":
+        form = ResearchForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            research = form.save(commit=False)
+
+            # OTHERS SELECTION
+            source_document = request.POST.get("source_document", "")
+            publication_type = request.POST.get("publication_type", "")
+
+            # HANDLING OF NONE VALUES
+            custom_source = request.POST.get("custom_source", "").strip()
+            custom_pub_type = request.POST.get("custom_pub_type", "").strip()
+
+            # ASSIGN VALUES WHEN CHOOSING "OTHERS"
+            research.custom_source = custom_source if source_document == "Others" else ""
+            research.custom_pub_type = custom_pub_type if publication_type == "Others" else ""
+
+            research.save()
+            form.save_m2m()
+            return redirect("ndrppcwp_admin_app:researches_list")
+
+        else:
+                 print("Form errors:", form.errors)
+
+    else:
+        form = ResearchForm()
+
+    return render(request, "ndrppcwp_admin_app/add.html", {"form": form})
 
 @lsg_decorators.validate_recaptcha
 def create_report_error(request, *args, **kwargs):

@@ -1,11 +1,16 @@
 from django.urls import path
 from . import views
+from .views import dashboard_data
+
 from django.views.generic import TemplateView
 
 app_name = "ndrppcwp_admin_app"
  
 urlpatterns = [ 
-    path("", views.index, name="index_page"),  
+    path("", views.index, name="index_page"),
+
+    path("dashboard-data/", views.dashboard_data, name="dashboard_data"),
+
     path("authors/", views.authors, name="authors"),  
     path("authors/add/", views.authors_add, name="authors_add"),  
     path("authors/edit/<uuid:id>/", views.authors_edit, name="authors_edit"),  

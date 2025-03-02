@@ -75,10 +75,10 @@
                             {% endfor %}
                         </dd>
                         <dt class="col-sm-4">Source Document:</dt>
-                        <dd class="col-sm-8">{{ research.source_document }}</dd>
+                        <dd class="col-sm-8">{{ research.get_source_document }}</dd>
                         </dd>
                         <dt class="col-sm-4">Publication Type:</dt>
-                        <dd class="col-sm-8">{{ research.publication_type }}</dd>
+                        <dd class="col-sm-8">{{ research.get_publication_type }}</dd>
                         </dd>
                         <dt class="col-sm-4">Publication Date:</dt>
                         <dd class="col-sm-8">{{ research.pub_date }}</dd>
@@ -106,7 +106,7 @@
                         Submit now
                         <i class="fas fa-angle-double-right ml-1"></i>
                     </a>
-                    <a href="https://www.facebook.com/DENREnviBureau/" target="_blank" class="btn btn-primary btn-lg w-100">
+                    <a href="https://emb.gov.ph/" target="_blank" class="btn btn-primary btn-lg w-100">
                         Subscribe now
                         <i class="fas fa-hand-pointer ml-1"></i>
                     </a>

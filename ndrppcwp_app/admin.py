@@ -38,6 +38,7 @@ class ResearchAdmin(ImportExportModelAdmin):
     ordering = ['date_created',]
     prepopulated_fields = {'slug': ('title',)}
 
+
 admin.site.register(models.Research, ResearchAdmin) 
 
 class AbstractResearchAdmin(ImportExportModelAdmin):
@@ -65,4 +66,5 @@ class ReportErrorAdmin(ImportExportModelAdmin):
     date_hierarchy = 'date_created'
     ordering = ['date_created',]
 
-admin.site.register(models.ReportError, ReportErrorAdmin) 
+admin.site.register(models.ReportError, ReportErrorAdmin)
+

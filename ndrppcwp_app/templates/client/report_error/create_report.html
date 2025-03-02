@@ -13,23 +13,22 @@
         <div class="row">
             <div class="col-md-12 col-12">
                 <div class="form-group">
-                    <label for="{{ form.name.id_for_label}}">Name:</label>
+                    <label for="{{ form.name }}">Name:</label>
                     {{ form.name }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.email.id_for_label}}">Email Address:</label>
+                    <label for="{{ form.email.id_for_label }}">Email Address:</label>
                     {{ form.email }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.org.id_for_label}}">Organization/Agency/Institution :</label>
+                    <label for="{{ form.org.id_for_label }}">Organization/Agency/Institution:</label>
                     {{ form.org }}
                 </div>
                 <div class="form-group">
-                    <label for="{{ form.text.id_for_label}}">Message :</label>
+                    <label for="{{ form.text.id_for_label }}">We would like to know what went wrong:</label>
                     {{ form.text }}
                 </div>
                 <div class="g-recaptcha-container">
-                    
                     <div id="my-recaptcha"></div>
                 </div>  
             </div>

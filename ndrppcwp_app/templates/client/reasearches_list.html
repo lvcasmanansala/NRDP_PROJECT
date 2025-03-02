@@ -49,8 +49,8 @@
                         <dt class="col-sm-4">URL:</dt>
                         <dd class="col-sm-8">
                             {% if q.URL %}
-                            <a href="{{ q.URL }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Open link in new tab">
-                                <i class="fas fa-external-link-alt mr-1"></i> 
+                            <a href="{{ q.URL }}" target="_blank" data-toggle="tooltip" data-placement="top" title="{{ q.URL }}">
+                                {{ q.URL }}
                             </a>
                             {% else %}
                             -
