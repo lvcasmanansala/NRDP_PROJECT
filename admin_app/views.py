@@ -456,6 +456,11 @@ def researches(request):
 
     objects = models.Research.objects.all().order_by('-date_created')
 
+    # Debugging: Print out the first few results to check ordering
+    print("Ordered Research List:")
+    for research in objects[:5]:  # Print first 5 entries
+        print(f"{research.title} - {research.date_created}")
+
     # search_term = request.GET.get('search_term','')
     # if search_term.strip():
     #     objects = objects.filter(

@@ -86,10 +86,10 @@ class Research(models.Model):
         ('Full-Text','Full-Text'),
     )
     STUDY_AREA_LIST = (
-        ('Source-Control Strategies', 'SCS'),
-        ('Resource-Directed Strategies','RDS'),
-        ('Revival and Rehabilitation Strategies','RRS'),
-        ('Overarching Strategies','OS'),
+        ('Source-Control Strategies', 'Source-Control Strategies'),
+        ('Resource-Directed Strategies','Resource-Directed Strategies'),
+        ('Revival and Rehabilitation Strategies','Revival and Rehabilitation Strategies'),
+        ('Overarching Strategies','Overarching Strategies'),
     )
 
 
