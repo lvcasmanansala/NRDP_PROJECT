@@ -1,3 +1,7 @@
 .env
 *.sql
 certificates
+media/
+*.png
+*.jpg
+*jpeg
