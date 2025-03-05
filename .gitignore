@@ -1,6 +1,5 @@
 .env
 *.sql
 certificates
-# Ignore all log files
 logs/*.log
 *.log
