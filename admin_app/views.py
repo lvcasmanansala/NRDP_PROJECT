@@ -9,7 +9,7 @@ from django.http import (
 from django.core.signing import Signer
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth import authenticate, login
-from django.db.models import Q, F
+from django.db.models import Q, F, Count
 from django.db.utils import IntegrityError, DataError
 from django.template.loader import render_to_string
 from django.conf import settings
@@ -32,6 +32,8 @@ from django.contrib.auth.models import User
 from ndrppcwp_app import models
 from admin_app import forms as forms_admin
 import json, requests, logging
+
+from ndrppcwp_app.models import Research
 
 logger = logging.getLogger('django')
 
@@ -260,14 +262,62 @@ def index(request):
     authors = models.Author.objects.all()
     researches = models.Research.objects.all()
     total_visitors = researches.aggregate(Sum('fk_abstract_research__counter')).get('fk_abstract_research__counter__sum',0)
-    
+    study_area_counts = models.Research.objects.values('study_area').annotate(count=Count('id'))
+
+    # DATA FOR CHART.JS
+    labels = [item['study_area'] for item in study_area_counts]
+    data = [item['count'] for item in study_area_counts]
+
     context = {
         'authors': authors,
         'researches': researches,
         'total_visitors': total_visitors,
+        'study_area_labels': labels,  # LABELS FOR CHART.JS
+        'study_area_data': data,  # DATA FOR CHART.JS
     }
+
     return render(request, template_name, context)
 
+# CORE STRATEGY GROUPS
+CORE_STRATEGIES = {
+    "Source-Control Strategies": ["Source-Control Strategies"],
+    "Resource-Directed Strategies": ["Resource-Directed Strategies"],
+    "Revival and Rehabilitation Strategies": ["Revival and Rehabilitation Strategies"],
+    "Overarching Strategies": ["Overarching Strategies"]
+}
+
+def dashboard_data(request):
+    # Debugging print
+    print("Fetching research counts...")
+
+    # Get research count grouped by study area
+    research_counts = (
+        Research.objects.values("study_area")
+        .annotate(count=Count("id"))
+        .order_by("study_area")
+    )
+
+    # Prepare the data to be grouped by core strategy
+    strategy_counts = {strategy: 0 for strategy in CORE_STRATEGIES.keys()}
+
+    # Debugging print
+    print("Initial strategy counts:", strategy_counts)
+
+    # Group research counts by core strategy
+    for entry in research_counts:
+        study_area = entry["study_area"]
+        for strategy, areas in CORE_STRATEGIES.items():
+            if study_area in areas:
+                strategy_counts[strategy] += entry["count"]
+
+    # Debugging print
+    print("Final grouped counts:", strategy_counts)
+
+    # Prepare labels and data for the chart
+    labels = list(strategy_counts.keys())
+    data = list(strategy_counts.values())
+
+    return JsonResponse({"labels": labels, "data": data})
 
 @login_required
 def authors(request):
@@ -455,37 +505,39 @@ def researches_add(request):
 
     if request.method == 'GET':
         form = forms_admin.ResearchForm(request.GET or None,initial={'status':True})
-    elif request.method == 'POST': 
+    elif request.method == 'POST':
 
         save_add_another = request.POST.get('_save_add_another', None)
         form = forms_admin.ResearchForm(request.POST or None, request.FILES)
 
-        if form.is_valid(): 
-            try: 
-                instance = form.save(commit=False) 
+        if form.is_valid():
+            try:
+                instance = form.save(commit=False)
                 abstract_text = form.cleaned_data['abstract_text']
-                author = form.cleaned_data['author'] 
-                instance.save() 
+                author = form.cleaned_data['author']
+                instance.save()
                 # NOTE: Adding/Saving M2M Field
                 for i in author:
                     instance.author.add(i)
-                
+
                 models.AbstractResearch.objects.create(research=instance, text=abstract_text)
-                
-                messages.success(request, "Research has been added!") 
+
+                messages.success(request, "Research has been added!")
             except IntegrityError as e:
                 messages.error(request, f"Error {e}")
-       
-            if isinstance(save_add_another, str): 
+
+            if isinstance(save_add_another, str):
                 return HttpResponseRedirect(reverse("ndrppcwp_admin_app:researches_add"))
 
-            return HttpResponseRedirect(reverse("ndrppcwp_admin_app:researches")) 
+            return HttpResponseRedirect(reverse("ndrppcwp_admin_app:researches"))
+
 
     context = {
         'user': user,
         'form': form,
     }
-    
+
+
     return render(request, template_name, context)
 
 
@@ -599,7 +651,6 @@ def docs(request, *args, **kwargs):
     context = {}
 
     return render(request, template_name, context)
-
 
 
 

@@ -39,7 +39,7 @@ Admin Manage Researches
                 </div>
                 <div class="card-body table-responsive">
                     {% include 'partials/_messages.html' %}
-             
+
                     <table class="table table-bordered table-hover text-nowrap">
                         <thead>
                             <tr class="text-center">
@@ -48,7 +48,7 @@ Admin Manage Researches
                                 <th>Author</th>
                                 <th>URL</th>
                                 <th>Publication Date</th>
-                                <th>Study area</th>
+                                <th>Core Strategy</th>
                                 <th>Source Document</th>
                                 <th>Text Availability</th>
                                 <th>Publication Type</th>
@@ -85,11 +85,12 @@ Admin Manage Researches
                                     {% endif %}
 
                                 </td>
-                                <td>{{i.pub_date}}</td>
+                                <td data-order="{{ i.pub_date|date:'Y-m-d' }}">{{ i.pub_date|date:"F Y" }}</td>
                                 <td>{{i.study_area}}</td>
-                                <td>{{i.source_document}}</td>
+                                <td>{{ i.get_source_document }}</td>
                                 <td>{{i.text_availability}}</td>
-                                <td>{{i.publication_type}}</td>
+                                <td>{{ i.get_publication_type }}</td>
+
                                 <td class="text-center">
                                     {% if i.status %}
                                     <i class="fas fa-check-circle text-success"></i>
@@ -147,5 +148,32 @@ Admin Manage Researches
 <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
 
 <script src="{% static 'js/micelleneous/getcookies.js' %}"></script>
-<script src="{% static 'js/administrator/researches/researches.js' %}" defer></script>
+<!<script src="{% static 'js/administrator/researches/researches.js' %}" defer></script>
+<script>
+$(document).ready(function () {
+    let table = $("table.table").DataTable({
+        "order": [[4, "desc"]],
+        "columnDefs": [
+            {
+                "targets": [4], // TARGETS DATE COLUMN INDEX
+                "type": "date"
+            },
+            {
+                "targets": [-2, -1],  // Disable sorting for action buttons
+                "orderable": false
+            }
+        ],
+        "responsive": true,
+        "lengthChange": true,
+        "autoWidth": false,
+        "select": true,
+        "info": true,
+        "lengthMenu": [
+            [5, 10, 25, 50, -1],
+            [5, 10, 25, 50, "All"]
+        ],
+    });
+});
+
+</script>
 {% endblock rearscript %}

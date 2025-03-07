@@ -38,9 +38,12 @@ Admin Add New Research
                     <div class="card-body">
                         {% include 'partials/_messages.html' %}
                         {% include 'partials/_form_errors.html' %} 
-                        <div class="col-md-6"> 
+                        <div class="col-md-6">
+
+
+
                             <div class="form-group">
-                                <label><span class="text-danger mr-1">*</span>Title:</label> 
+                                <label><span class="text-danger mr-1">*</span>Title:</label>
                                 {{ form.title }}
                             </div>
                             <div class="form-group">
@@ -48,58 +51,70 @@ Admin Add New Research
                                 {{ form.author }}
                             </div>
                             <div class="form-group">
-                                <label><span class="text-danger mr-1">*</span>URL Link:</label> 
+                                <label><span class="text-danger mr-1">*</span>URL Link:</label>
                                 {{ form.URL }}
                             </div>
                             <div class="form-group">
-                                <label>Publication Date:</label> 
+                                <label><span class="text-danger mr-1">*</span>Publication Date:</label>
                                 {{ form.pub_date }}
                             </div>
                         
                             <div class="form-group">
-                                <label>Publication Year:</label> 
+                                <label><span class="text-danger mr-1">*</span>Publication Year:</label>
                                 {{ form.pub_year }}
                             </div>
                             <div class="form-group">
-                                <label>PDF Attachment:</label> 
+                                <label><span class="text-danger mr-1">*</span>PDF Attachment:</label>
                                 {{ form.pdf }}
                             </div>
                             <div class="form-group">
-                                <label>Applicable NRDP-PCWP Strategy:</label> 
+                                <label><span class="text-danger mr-1">*</span>Applicable NRDP-PCWP Strategy:</label>
                                 {{ form.study_area }}
                             </div>
                         
                             <div class="form-group">
-                                <label>Source Document:</label> 
-                                {{ form.source_document }}
+                                <label for="id_source_document"><span class="text-danger mr-1">*</span>Source Document:</label>
+                                 <select name="source_document" id="id_source_document" class="form-control select2">
+                                     <option value="">-- Select Source Document --</option>
+                                     <option value="Sylvatrop Technical Journal of the Philippine Ecosystems">Sylvatrop</option>
+                                     <option value="Natural Resources Volume 27 Nos. 1 and 2">Natural Resources</option>
+                                     <option value="Herdin">Herdin</option>
+                                     <option value="PCIEERD">PCIEERD</option>
+                                     <option value="ResearchGate">ResearchGate</option>
+                                     <option value="Others">Others</option>
+                                </select>
+                                <input type="text" name="custom_source" id="id_custom_source" class="form-control mt-2" style="display:none;" placeholder="Enter custom source document">
                             </div>
                             <!-- ! URL href table and date format on edit form -->
-                        
                             <div class="form-group">
-                                <label>Text Availability:</label> 
+                                <label><span class="text-danger mr-1">*</span>Text Availability:</label>
                                 {{ form.text_availability }}
                             </div>
                             <div class="form-group">
-                                <label>Publication Type:</label> 
-                                {{ form.publication_type }}
+                                <label for="id_publication_type"><span class="text-danger mr-1">*</span>Publication Type:</label>
+                                <select name="publication_type" id="id_publication_type" class="form-control select2">
+                                    <option value="">-- Select Publication Type --</option>
+                                    <option value="Journal">Journal</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                <input type="text" name="custom_pub_type" id="id_custom_publication" class="form-control mt-2" style="display:none;" placeholder="Enter custom publication type">
                             </div>
                             <div class="form-group">
-                                <label>Status (if Completed or Not):</label> 
+                                <label><span class="text-danger mr-1">*</span>Status (if Completed or Not):</label>
                                 {{ form.status }}
                             </div>
                             <div class="form-group">
-                                <label>Category:</label> 
+                                <label><span class="text-danger mr-1">*</span>Category:</label>
                                 {{ form.categories }}
                             </div>
                             <div class="form-group">
-                                <label>Remarks:</label> 
+                                <label><span class="text-danger mr-1">*</span>Remarks:</label>
                                 {{ form.remarks }}
                             </div>
                             <div class="form-group">
-                                <label>Abstract Text:</label> 
+                                <label><span class="text-danger mr-1">*</span>Abstract Text:</label>
                                 {{ form.abstract_text }}
                             </div>
-                        
                         </div>
                     </div>
                     <div class="card-footer">
@@ -113,21 +128,65 @@ Admin Add New Research
 
                         <a href="{% url 'ndrppcwp_admin_app:researches' %}" class="btn bg-gradient-secondary float-right">
                             <i class="fas fa-arrow-left mr-1"></i>
-                            Back</a>
+                            Return to Main Page</a>
 
                     </div>
                 </div>
             </form>
-          
+
         </div>
     </div>
 
 
 </div>
 {% endblock content_body %}
-
-
 {% block rearscript %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    function toggleCustomInput(selectId, customInputId) {
+        let selectField = document.getElementById(selectId);
+        let customInput = document.getElementById(customInputId);
 
+        selectField.addEventListener("change", function() {
+            if (this.value === "Others") {
+                customInput.style.display = "block";
+                customInput.required = true;
+            } else {
+                customInput.style.display = "none";
+                customInput.required = false;
+                customInput.value = "";  // Clear input when not needed
+            }
+        });
+    }
+
+    // Call function for both dropdowns
+    toggleCustomInput("id_source_document", "id_custom_source");
+    toggleCustomInput("id_publication_type", "id_custom_pub_type");
+});
+</script>
+<script>
+    $(document).ready(function () {
+        // Initialize Select2 for both dropdowns
+        $('.select2').select2({
+            placeholder: "Select an option",
+            allowClear: true
+        });
+
+        // Function to handle "Others" selection for any dropdown
+        function handleOthers(selectId, inputId) {
+            $(selectId).on('change', function () {
+                if ($(this).val() === "Others") {
+                    $(inputId).show().focus(); // Show input field when "Others" is selected
+                } else {
+                    $(inputId).hide().val(''); // Hide and clear input field otherwise
+                }
+            });
+        }
+
+        // Apply the function to both Source Document & Publication Type
+        handleOthers('#id_source_document', '#id_custom_source');
+        handleOthers('#id_publication_type', '#id_custom_publication');
+    });
+</script>
 <script src="{% static 'js/administrator/researches/form.js' %}" defer></script>
 {% endblock rearscript %}
