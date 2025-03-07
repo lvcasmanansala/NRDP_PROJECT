@@ -1,0 +1,133 @@
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f8f8f8;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+}
+
+.notification span {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-overflow: word-wrap;
+    max-width: 300px;
+    text-align: justify;
+}
+
+.notification button {
+    background-color: #F79F27;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+    float: right;
+    transition: 0.5s ease;
+}
+
+.notification button:hover{
+    background-color: #CCC;
+    transition: 0.5s ease;
+}
+.search-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #F79F27;
+    border-radius: 25px;
+    padding: 7px;
+    background-color: #FFF;
+}
+
+.search-group:focus-within {
+    border: 2px solid #F79F27;
+}
+
+.search-group .button {
+    position: relative;
+    background-color: #F79F27;
+    color: #FFF;
+    text-transform: uppercase;
+    border: none;
+    padding: 7px;
+    font-size: 1.1rem;
+    width: 150px;
+    transition: 0.5s ease;
+}
+
+.search-group .button:nth-of-type(2){
+    width: 60px !important; 
+}
+
+
+.button.left-border-only {
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+}
+
+.button.right-border-only {
+
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
+.search-group .button:hover {
+    background-color: #d4800b;
+    transition: 0.5s ease;
+}
+
+.search-group input[type="text"] {
+    position: relative;
+    width: 100%;
+    border: none;
+}
+
+.search-group input[type="text"]:focus {
+    outline: none;
+}
+
+.search-group i.search-icon {
+    position: relative;
+    width: 50%;
+    font-size: 1.5rem;
+    padding: 7px;
+    margin: 0 8px 0 8px;
+    color: #0C79BD;
+}
+
+.research-item .r-title a {
+    color: #0396A6;
+    transition: 0.8s ease;
+}
+
+.research-item .r-title a:hover {
+    color: #03bbcf;
+    transition: 0.8s ease;
+}
+
+.research-item .abstract p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+table td,th{
+    vertical-align: middle !important;
+}
+
+table td{
+    max-width: 250px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+

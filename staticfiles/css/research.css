@@ -1,0 +1,8 @@
+#id_status{
+    list-style: none;
+    padding: 0;
+}
+#id_status li {        
+    display: inline-block;
+    margin-right: 8px;
+}
