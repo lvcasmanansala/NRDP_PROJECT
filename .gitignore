@@ -1,5 +1,5 @@
 .env
 *.sql
 certificates
-logs/info.log
+logs/debug.log
 *.pdf
