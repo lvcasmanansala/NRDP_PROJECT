@@ -3,3 +3,5 @@
 certificates
 logs/debug.log
 *.pdf
+*.logs
+logs
