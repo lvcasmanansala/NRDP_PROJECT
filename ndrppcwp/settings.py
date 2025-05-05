@@ -39,7 +39,7 @@ IIS_IP = os.getenv("IIS_IP")
 GOOGLE_RECAPTCHA_SECRET_KEY = os.getenv("reCAPTCHA_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production! 
 DEBUG = int(os.environ.get("DEBUG", default=0))
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "*").split(" ")
 STATICFILES_DIRS = ["/Desktop/Project/nrdp/ndrppcwp_app/static",]
 
